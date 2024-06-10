@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import config from './config';
 import router from './routes';
+import { errorHandler, notFound } from './middlewares';
 
 class App {
   public app: express.Application;
@@ -17,6 +18,7 @@ class App {
 
     this.initializeMiddlewares();
     this.initializeRoutes();
+    this.initializeErrorHandling();
   }
 
   private initializeMiddlewares() {
@@ -33,6 +35,11 @@ class App {
 
   private initializeRoutes() {
     this.app.use('/api/v1', router);
+  }
+
+  private initializeErrorHandling() {
+    this.app.use(notFound);
+    this.app.use(errorHandler);
   }
 }
 
