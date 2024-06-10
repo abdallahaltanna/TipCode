@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import config from './config';
+import router from './routes';
 
 class App {
   public app: express.Application;
@@ -15,6 +16,7 @@ class App {
     this.port = config.port;
 
     this.initializeMiddlewares();
+    this.initializeRoutes();
   }
 
   private initializeMiddlewares() {
@@ -27,6 +29,10 @@ class App {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.disable('x-powered-by');
     this.app.set('port', this.port);
+  }
+
+  private initializeRoutes() {
+    this.app.use('/api/v1', router);
   }
 }
 
