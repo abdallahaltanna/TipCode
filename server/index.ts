@@ -1,5 +1,6 @@
 import app from './app';
 import http from 'http';
+import db from './database/connection';
 
 const port = app.get('port');
 

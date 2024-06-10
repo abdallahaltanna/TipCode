@@ -7,7 +7,7 @@ import config from './config';
 class App {
   public app: express.Application;
   public nodeEnv: string;
-  public port: string | number;
+  public port: number | string;
 
   constructor() {
     this.app = express();
