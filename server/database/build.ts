@@ -2,14 +2,17 @@ import db from './connection';
 import { CrewMembers, Missions, Spaceships } from '../models';
 import { exit } from 'process';
 
+// Create db query
 const createDatabase: string = `
     CREATE DATABASE IF NOT EXISTS SpaceshipTravelSystem;
 `;
 
+// Use db query
 const useDatabase: string = `
     USE SpaceshipTravelSystem;
 `;
 
+// Create db and tables function
 const createDatabaseAndTables = (): Promise<void> => {
   return new Promise<void>((resolve, reject) => {
     db.query(createDatabase, (err: Error) => {

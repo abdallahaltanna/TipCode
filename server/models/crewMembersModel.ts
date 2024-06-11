@@ -1,3 +1,4 @@
+//  Table: CrewMembers
 const CrewMembers = `
     CREATE TABLE IF NOT EXISTS CrewMembers (
         CrewMemberID INT AUTO_INCREMENT PRIMARY KEY,

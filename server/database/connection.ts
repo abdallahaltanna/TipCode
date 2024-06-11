@@ -1,13 +1,16 @@
 import mysql from 'mysql2';
 import config from '../config';
 
+// Destructure the config object to get the nodeEnv and db object
 const {
   nodeEnv,
   db: { devDB, proDB }
 } = config;
 
+// Define the connection string
 let connectionString: string | undefined = '';
 
+// Check the nodeEnv and set the connection string accordingly
 if (nodeEnv === 'development') {
   connectionString = devDB;
 } else if (nodeEnv === 'production') {
@@ -20,11 +23,7 @@ if (!connectionString) {
   throw new Error('Database url is not a valid mysql connection url.');
 }
 
-const connection = mysql.createConnection(connectionString);
+// Create a connection pool
+const connection = mysql.createPool(connectionString);
 
-connection.connect(err => {
-  if (err) throw err;
-  console.log('Database connected!');
-});
-
-export default connection;
+export default connection.promise();

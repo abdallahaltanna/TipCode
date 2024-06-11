@@ -11,6 +11,7 @@ const {
 
 const router = Router();
 
+// Missions routes
 router.route('/').get(getAllMissions).post(createMission);
 
 router

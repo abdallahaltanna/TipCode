@@ -9,8 +9,10 @@ const {
   updateCrewmember
 } = CrewMembersController;
 
+// Crewmembers router
 const router = Router();
 
+// Crewmembers routes
 router.route('/').get(getAllCrewmembers).post(createCrewmember);
 
 router

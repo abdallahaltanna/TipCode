@@ -6,17 +6,19 @@ const {
   createSpaceship,
   deleteSpaceship,
   getSpaceship,
-  updateSpaceship
+  updateSpaceship,
+  patchSpaceship
 } = SpaceshipsController;
 
 const router = Router();
 
+// Spaceships routes
 router.route('/').get(getAllSpaceships).post(createSpaceship);
 router
   .route('/:id')
   .get(getSpaceship)
   .put(updateSpaceship)
-  .patch(updateSpaceship)
+  .patch(patchSpaceship)
   .delete(deleteSpaceship);
 
 export default router;
