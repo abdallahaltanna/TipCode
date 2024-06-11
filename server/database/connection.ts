@@ -1,4 +1,4 @@
-import mysql from 'mysql2';
+import mysql from 'mysql2/promise';
 import config from '../config';
 
 // Destructure the config object to get the nodeEnv and db object
@@ -26,4 +26,4 @@ if (!connectionString) {
 // Create a connection pool
 const connection = mysql.createPool(connectionString);
 
-export default connection.promise();
+export default connection;

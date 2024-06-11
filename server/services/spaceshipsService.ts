@@ -16,7 +16,7 @@ class SpaceshipsService {
     LaunchDate,
     Status
   }: ISpaceship): Promise<ISpaceship> {
-    const result = await db.query(
+    const [result] = await db.query(
       'INSERT INTO Spaceships (Name, Capacity, LaunchDate, Status) VALUES (?, ?, ?, ?)',
       [Name, Capacity, LaunchDate, Status]
     );
@@ -27,7 +27,7 @@ class SpaceshipsService {
   // Get spaceship by id query
   static async getSpaceshipQuery(id: number) {
     if (isNaN(id)) {
-      throw new GenericError(400, 'Please enter a valid number');
+      throw new GenericError(400, 'Please enter a valid id');
     }
 
     const [spaceship] = await db.query(
@@ -72,8 +72,9 @@ class SpaceshipsService {
 
     await db.query(
       `UPDATE Spaceships SET ${updateFields} WHERE SpaceshipID = ?`,
-      updateValues
+      [...updateValues, id]
     );
+
     const [updatedSpaceship] = await db.query(
       'SELECT * FROM Spaceships WHERE SpaceshipID = ?',
       [id]

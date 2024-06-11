@@ -37,11 +37,20 @@ class SpaceshipsController {
       }
 
       const LaunchDate = new Date(Date.now());
-      await SpaceshipsService.createSpaceshipQuery({
+      const result: any = await SpaceshipsService.createSpaceshipQuery({
         ...value,
         LaunchDate
       });
-      res.status(201).json({ status: 201, msg: 'Spaceship created' });
+
+      req.session.lastSpaceshipId = result.insertId;
+
+      res
+        .status(201)
+        .cookie('lastSpaceshipId', result.insertId, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production'
+        })
+        .json({ status: 201, msg: 'Spaceship created' });
     } catch (error) {
       next(error);
     }

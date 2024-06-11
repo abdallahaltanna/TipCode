@@ -6,7 +6,8 @@ const {
   createCrewmember,
   deleteCrewmember,
   getCrewmember,
-  updateCrewmember
+  updateCrewmember,
+  patchCrewmember
 } = CrewMembersController;
 
 // Crewmembers router
@@ -19,7 +20,7 @@ router
   .route('/:id')
   .get(getCrewmember)
   .put(updateCrewmember)
-  .patch(updateCrewmember)
+  .patch(patchCrewmember)
   .delete(deleteCrewmember);
 
 export default router;

@@ -2,64 +2,31 @@ import db from './connection';
 import { CrewMembers, Missions, Spaceships } from '../models';
 import { exit } from 'process';
 
-// Create db query
-const createDatabase: string = `
-    CREATE DATABASE IF NOT EXISTS SpaceshipTravelSystem;
-`;
+const createDatabaseAndTables = async (): Promise<void> => {
+  try {
+    // Create the database
+    await db.query(`CREATE DATABASE IF NOT EXISTS SpaceshipTravelSystem`);
+    console.log('Database created or already exists.');
 
-// Use db query
-const useDatabase: string = `
-    USE SpaceshipTravelSystem;
-`;
+    // Use the database
+    await db.query(`USE SpaceshipTravelSystem`);
+    console.log('Using SpaceshipTravelSystem database.');
 
-// Create db and tables function
-const createDatabaseAndTables = (): Promise<void> => {
-  return new Promise<void>((resolve, reject) => {
-    db.query(createDatabase, (err: Error) => {
-      if (err) reject(err);
-      console.log('Database created or already exists.');
+    // Create tables
+    const tables = [Spaceships, CrewMembers, Missions];
 
-      db.query(useDatabase, (err: Error) => {
-        if (err) reject(err);
-        console.log('Using SpaceshipTravelSystem database.');
+    for (const tableQuery of tables) {
+      await db.query(tableQuery);
+    }
 
-        Promise.all([
-          new Promise<void>((resolve, reject) => {
-            db.query(Spaceships, (err: Error) => {
-              if (err) reject(err);
-              console.log('Spaceships table created or already exists.');
-              resolve();
-            });
-          }),
-          new Promise<void>((resolve, reject) => {
-            db.query(CrewMembers, (err: Error) => {
-              if (err) reject(err);
-              console.log('CrewMembers table created or already exists.');
-              resolve();
-            });
-          }),
-          new Promise<void>((resolve, reject) => {
-            db.query(Missions, (err: Error) => {
-              if (err) reject(err);
-              console.log('Missions table created or already exists.');
-              resolve();
-            });
-          })
-        ])
-          .then(() => resolve())
-          .catch(err => reject(err));
-      });
-    });
-  });
+    console.log('Tables created or already exist.');
+    console.log('Database setup complete.');
+    exit(0);
+  } catch (err) {
+    console.error('Failed to set up database:', err);
+    exit(1);
+  }
 };
 
 // Run the function
-createDatabaseAndTables()
-  .then(() => {
-    console.log('Database setup complete.');
-    exit(0);
-  })
-  .catch(err => {
-    console.error('Failed to set up database:', err);
-    exit(1);
-  });
+createDatabaseAndTables();

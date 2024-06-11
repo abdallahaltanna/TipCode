@@ -1,6 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
 
 import config from './config';
 import router from './routes';
@@ -33,12 +35,23 @@ class App {
 
     // Enable CORS
     this.app.use(cors({ origin: config.origin, credentials: true }));
+    // Parse cookies
+    this.app.use(cookieParser());
     // Parse incoming requests with JSON payloads
     this.app.use(express.json());
     // Parse incoming requests with urlencoded payloads
     this.app.use(express.urlencoded({ extended: false }));
     // Disable the x-powered-by header
     this.app.disable('x-powered-by');
+
+    // Initialize the express-session middleware
+    this.app.use(
+      session({
+        secret: config.sessionSecret,
+        resave: false,
+        saveUninitialized: false
+      })
+    );
 
     // Set the port
     this.app.set('port', this.port);
