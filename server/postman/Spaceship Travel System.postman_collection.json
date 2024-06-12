@@ -1,0 +1,523 @@
+{
+	"info": {
+		"_postman_id": "6cd04da8-a9b7-4cea-b075-72ede5659d00",
+		"name": "Spaceship Travel System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16856338"
+	},
+	"item": [
+		{
+			"name": "Spaceship",
+			"item": [
+				{
+					"name": "Get All Spaceship",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/spaceships",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"spaceships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Spaceship",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Name",
+									"value": "Mohamoud",
+									"type": "text"
+								},
+								{
+									"key": "Capacity",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "Status",
+									"value": "After the moon",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/spaceships",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"spaceships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Spaceship (PUT)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Name",
+									"value": "Just for testing",
+									"type": "text"
+								},
+								{
+									"key": "Capacity",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "Status",
+									"value": "Not arrived",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/spaceships/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"spaceships",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Spaceship (PATCH)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Name",
+									"value": "Mohammed",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/spaceships/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"spaceships",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Spaceship",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/spaceships/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"spaceships",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Spaceship",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/spaceships/edew",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"spaceships",
+								"edew"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crew Members",
+			"item": [
+				{
+					"name": "Get All CrewMembers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/crewmembers",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"crewmembers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create CrewMember",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Name",
+									"value": "Abdallah Al-Tanna",
+									"type": "text"
+								},
+								{
+									"key": "Role",
+									"value": "Commander",
+									"type": "text"
+								},
+								{
+									"key": "ExperienceLevel",
+									"value": "Novice",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/crewmembers",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"crewmembers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update CrewMember (PUT)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Name",
+									"value": "Mohammed Al-Tanna",
+									"type": "text"
+								},
+								{
+									"key": "Role",
+									"value": "Commander",
+									"type": "text"
+								},
+								{
+									"key": "ExperienceLevel",
+									"value": "Novice",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/crewmembers/4",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"crewmembers",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update CrewMember (PATCH)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Name",
+									"value": "Abood",
+									"type": "text"
+								},
+								{
+									"key": "Role",
+									"value": "Engineer",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/crewmembers/4",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"crewmembers",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete CrewMember",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/crewmembers/10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"crewmembers",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CrewMember",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/crewmembers/10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"crewmembers",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Missions",
+			"item": [
+				{
+					"name": "Get All Missions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/missions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"missions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Mission",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Destination",
+									"value": "10km",
+									"type": "text"
+								},
+								{
+									"key": "Duration",
+									"value": "1000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/missions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"missions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Mission (PUT)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Destination",
+									"value": "6km",
+									"type": "text"
+								},
+								{
+									"key": "Duration",
+									"value": "100",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/missions/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"missions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Mission (PATCH)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Destination",
+									"value": "3km",
+									"type": "text"
+								},
+								{
+									"key": "Duration",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/missions/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"missions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Mission",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/missions/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"missions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Mission",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/missions/10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"missions",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		}
+	]
+}

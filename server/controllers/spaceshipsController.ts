@@ -43,8 +43,6 @@ class SpaceshipsController {
         LaunchDate
       });
 
-      // req.session.lastSpaceshipId = result.insertId;
-
       res
         .status(201)
         .cookie('lastSpaceshipId', result.insertId, {

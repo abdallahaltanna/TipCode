@@ -1,7 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import session from 'express-session';
 import cookieParser from 'cookie-parser';
 
 import config from './config';
@@ -43,15 +42,6 @@ class App {
     this.app.use(express.urlencoded({ extended: false }));
     // Disable the x-powered-by header
     this.app.disable('x-powered-by');
-
-    // Initialize the express-session middleware
-    this.app.use(
-      session({
-        secret: config.sessionSecret,
-        resave: false,
-        saveUninitialized: false
-      })
-    );
 
     // Set the port
     this.app.set('port', this.port);

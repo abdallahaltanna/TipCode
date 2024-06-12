@@ -4,8 +4,7 @@ import { Config } from '../utils/interfaces';
 
 dotenv.config();
 
-const { NODE_ENV, PORT, ORIGIN, DEV_DB_URL, PRO_DB_URL, SESSION_SECRET } =
-  process.env;
+const { NODE_ENV, PORT, ORIGIN, DEV_DB_URL, PRO_DB_URL } = process.env;
 
 const config: Config = {
   nodeEnv: NODE_ENV || 'development',
@@ -14,8 +13,7 @@ const config: Config = {
   db: {
     devDB: DEV_DB_URL || '',
     proDB: PRO_DB_URL || ''
-  },
-  sessionSecret: SESSION_SECRET || 'secret'
+  }
 };
 
 export default config;

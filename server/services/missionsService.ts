@@ -50,8 +50,8 @@ class MissionsService {
     await this.getMissionQuery(id);
 
     await db.query(
-      'UPDATE Missions SET Destination = ?, LaunchDate = ?, Duration = ?, SpaceshipID = ? WHERE MissionID = ?',
-      [Destination, LaunchDate, Duration, SpaceshipID, id]
+      'UPDATE Missions SET Destination = ?, LaunchDate = ?, Duration = ? WHERE MissionID = ?',
+      [Destination, LaunchDate, Duration, id]
     );
 
     const [updatedMission] = await db.query(

@@ -45,13 +45,13 @@ class CrewMembersService {
   // Update crew member query
   static async updateCrewMemberQuery(
     id: number,
-    { Name, Role, ExperienceLevel, AssignedSpaceshipID }: ICrewMember
+    { Name, Role, ExperienceLevel }: ICrewMember
   ): Promise<ICrewMember> {
     await this.getCrewMemberQuery(id);
 
     await db.query(
-      'UPDATE CrewMembers SET Name = ?, Role = ?, ExperienceLevel = ?, AssignedSpaceshipID = ? WHERE CrewMemberID = ?',
-      [Name, Role, ExperienceLevel, AssignedSpaceshipID, id]
+      'UPDATE CrewMembers SET Name = ?, Role = ?, ExperienceLevel = ? WHERE CrewMemberID = ?',
+      [Name, Role, ExperienceLevel, id]
     );
 
     const [updatedCrewMember] = await db.query(

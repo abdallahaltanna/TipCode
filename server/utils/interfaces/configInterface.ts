@@ -6,7 +6,6 @@ interface Config {
     devDB: string;
     proDB: string;
   };
-  sessionSecret: string;
 }
 
 export default Config;

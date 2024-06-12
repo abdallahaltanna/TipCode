@@ -87,7 +87,7 @@ class CrewmembersController {
 
       const crewmember = await CrewmembersService.updateCrewMemberQuery(
         Number(id),
-        { ...value, AssignedSpaceshipID: req.cookies.lastSpaceshipId }
+        { ...value }
       );
       res.status(200).json(crewmember);
     } catch (error) {

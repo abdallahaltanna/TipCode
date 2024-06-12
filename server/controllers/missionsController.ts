@@ -3,7 +3,7 @@ import MissionsService from '../services/missionsService';
 import { missionSchema } from '../validations';
 import { ValidationResult } from 'joi';
 import GenericError from '../errors/genericError';
-import { ICrewMember, IMission } from '../utils/interfaces';
+import { IMission } from '../utils/interfaces';
 
 class MissionsController {
   // Get all missions controller
@@ -83,8 +83,7 @@ class MissionsController {
 
       const mission = await MissionsService.updateMissionQuery(Number(id), {
         ...value,
-        LaunchDate: new Date(Date.now()),
-        SpaceshipID: req.cookies.lastSpaceshipId
+        LaunchDate: new Date(Date.now())
       });
 
       res.status(200).json(mission);
