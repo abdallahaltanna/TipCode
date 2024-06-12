@@ -83,7 +83,7 @@ class CrewMembersService {
   }
 
   // Delete crew member query
-  static async deleteCrewMemberQuery(id: number) {
+  static async deleteCrewMemberQuery(id: number): Promise<void> {
     await this.getCrewMemberQuery(id);
 
     await db.query('DELETE FROM CrewMembers WHERE CrewMemberID = ?', [id]);

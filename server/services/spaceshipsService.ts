@@ -15,13 +15,13 @@ class SpaceshipsService {
     Capacity,
     LaunchDate,
     Status
-  }: ISpaceship): Promise<ISpaceship> {
+  }: ISpaceship) {
     const [result] = await db.query(
       'INSERT INTO Spaceships (Name, Capacity, LaunchDate, Status) VALUES (?, ?, ?, ?)',
       [Name, Capacity, LaunchDate, Status]
     );
 
-    return result as unknown as ISpaceship;
+    return result;
   }
 
   // Get spaceship by id query
@@ -46,7 +46,7 @@ class SpaceshipsService {
   static async updateSpaceshipQuery(
     id: number,
     { Name, Capacity, Status, LaunchDate }: ISpaceship
-  ): Promise<ISpaceship> {
+  ) {
     await this.getSpaceshipQuery(id);
 
     await db.query(
@@ -59,7 +59,7 @@ class SpaceshipsService {
       [id]
     );
 
-    return updatedSpaceship as unknown as ISpaceship;
+    return updatedSpaceship;
   }
 
   // Patch spaceship query
@@ -67,7 +67,7 @@ class SpaceshipsService {
     id: number,
     updateFields: string,
     updateValues: Array<string | number>
-  ): Promise<ISpaceship> {
+  ) {
     await this.getSpaceshipQuery(id);
 
     await db.query(
@@ -80,11 +80,11 @@ class SpaceshipsService {
       [id]
     );
 
-    return updatedSpaceship as unknown as ISpaceship;
+    return updatedSpaceship;
   }
 
   // Delete spaceship query
-  static async deleteSpaceshipQuery(id: number): Promise<void> {
+  static async deleteSpaceshipQuery(id: number) {
     await this.getSpaceshipQuery(id);
 
     await db.query('DELETE FROM Spaceships WHERE SpaceshipID = ?', [id]);

@@ -6,7 +6,8 @@ const {
   createMission,
   deleteMission,
   getMission,
-  updateMission
+  updateMission,
+  patchMission
 } = missionsController;
 
 const router = Router();
@@ -18,7 +19,7 @@ router
   .route('/:id')
   .get(getMission)
   .put(updateMission)
-  .patch(updateMission)
+  .patch(patchMission)
   .delete(deleteMission);
 
 export default router;

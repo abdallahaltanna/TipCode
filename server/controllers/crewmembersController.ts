@@ -23,7 +23,7 @@ class CrewmembersController {
 
   // Create crewmember controller
   static async createCrewmember(
-    req: Request<{}, {}, ICrewMember>,
+    req: Request<{}, {}, Omit<ICrewMember, 'AssignedSpaceshipID'>>,
     res: Response,
     next: NextFunction
   ): Promise<void> {
@@ -38,7 +38,10 @@ class CrewmembersController {
 
       await CrewmembersService.createCrewMemberQuery({
         ...value,
-        AssignedSpaceshipID: req.cookies.lastSpaceshipId
+        AssignedSpaceshipID:
+          req.cookies && req.cookies.lastSpaceshipId
+            ? req.cookies.lastSpaceshipId
+            : null
       });
 
       res.status(201).json({ status: 201, msg: 'Crewmember created' });
@@ -66,10 +69,10 @@ class CrewmembersController {
 
   // Update crewmember controller
   static async updateCrewmember(
-    req: Request<{ id: string }, {}, ICrewMember>,
+    req: Request<{ id: string }, {}, Omit<ICrewMember, 'AssignedSpaceshipID'>>,
     res: Response,
     next: NextFunction
-  ) {
+  ): Promise<void> {
     const { Name, Role, ExperienceLevel } = req.body;
     const { id } = req.params;
     try {

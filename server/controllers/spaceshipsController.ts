@@ -5,6 +5,7 @@ import SpaceshipsService from '../services/spaceshipsService';
 import { ISpaceship } from '../utils/interfaces';
 import { spaceshipsSchema, patchSpaceshipsSchema } from '../validations';
 import GenericError from '../errors/genericError';
+import checkAssociation from '../utils/checkAssociation';
 
 class SpaceshipsController {
   // Get all spaceships controller
@@ -42,7 +43,7 @@ class SpaceshipsController {
         LaunchDate
       });
 
-      req.session.lastSpaceshipId = result.insertId;
+      // req.session.lastSpaceshipId = result.insertId;
 
       res
         .status(201)
@@ -143,8 +144,24 @@ class SpaceshipsController {
   ): Promise<void> {
     const { id } = req.params;
     try {
+      // call checkAssociation function here
+      const { mission, crew } = await checkAssociation(Number(id));
+      if (mission || crew) {
+        throw new GenericError(
+          409,
+          'Spaceship is associated with missions or crew members'
+        );
+      }
+
       await SpaceshipsService.deleteSpaceshipQuery(Number(id));
-      res.status(200).json({ status: 200, msg: 'Spaceship deleted' });
+
+      res
+        .status(200)
+        .cookie('lastSpaceshipId', 'clean', {
+          httpOnly: true,
+          expires: new Date(Date.now() + 100)
+        })
+        .json({ status: 200, msg: 'Spaceship deleted' });
     } catch (error) {
       next(error);
     }
