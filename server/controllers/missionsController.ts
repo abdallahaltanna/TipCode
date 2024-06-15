@@ -3,13 +3,25 @@ import MissionsService from '../services/missionsService';
 import { missionSchema } from '../validations';
 import { ValidationResult } from 'joi';
 import GenericError from '../errors/genericError';
-import { IMission } from '../utils/interfaces';
+import { IMission, IPaginationSearch } from '../utils/interfaces';
 
 class MissionsController {
   // Get all missions controller
-  static async getAllMissions(req: Request, res: Response, next: NextFunction) {
+  static async getAllMissions(
+    req: Request<{}, {}, {}, IPaginationSearch>,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      const missions = await MissionsService.getAllMissionsQuery();
+      const { search, page = 1, limit = 5 } = req.query;
+      const pageNum = parseInt(page as string, 10);
+      const limitNum = parseInt(limit as string, 10);
+
+      const missions = await MissionsService.getAllMissionsQuery(
+        search as string,
+        pageNum,
+        limitNum
+      );
       res.status(200).json(missions);
     } catch (error) {
       next(error);

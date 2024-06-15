@@ -2,19 +2,26 @@ import { Request, Response, NextFunction } from 'express';
 import { ValidationResult } from 'joi';
 
 import CrewmembersService from '../services/crewmembersService';
-import { ICrewMember } from '../utils/interfaces';
+import { ICrewMember, IPaginationSearch } from '../utils/interfaces';
 import { crewmemberSchema, patchCrewmemberSchema } from '../validations';
 import GenericError from '../errors/genericError';
 
 class CrewmembersController {
   // Get all crewmembers controller
   static async getAllCrewmembers(
-    req: Request,
+    req: Request<{}, {}, {}, IPaginationSearch>,
     res: Response,
     next: NextFunction
   ): Promise<void> {
+    const { search, page = 1, limit = 5 } = req.query;
+    const pageNum = parseInt(page as string, 10);
+    const limitNum = parseInt(limit as string, 10);
     try {
-      const crewmembers = await CrewmembersService.getAllCrewMembersQuery();
+      const crewmembers = await CrewmembersService.getAllCrewMembersQuery(
+        search as string,
+        pageNum,
+        limitNum
+      );
       res.status(200).json(crewmembers);
     } catch (error) {
       next(error);

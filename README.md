@@ -24,7 +24,7 @@ The application consists of 3 tables
 
 - [Database](https://drawsql.app/teams/abdallah-altanna/diagrams/spaceship-travel-system)
 
-![Database Diagram](https://i.postimg.cc/1Xp8ckYj/draw-SQL-image-export-2024-06-12.png)
+![Database Diagram](https://i.postimg.cc/3r6wsFCR/draw-SQL-image-export-2024-06-15.png)
 
 ## 🛠️ Setup
 
@@ -56,6 +56,7 @@ The application consists of 3 tables
 - 📦 Database: MySQL
 - 🍪 Session Management: cookie-parser
 - ✅ Validation: Joi
+- 📦 DevOps: Docker
 - 🚀 Deployment: Azure
 
 ## 📬 Postman Collection

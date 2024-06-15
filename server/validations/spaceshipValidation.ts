@@ -10,14 +10,12 @@ const spaceshipsSchema = joi.object({
   Capacity: joi.number().integer().min(1).required(),
   Status: joi
     .string()
-    .min(3)
-    .max(30)
     .trim()
+    .valid('Active', 'Inactive')
     .messages({
       'string.base': 'Status should be a string',
       'string.empty': 'Status should not be empty',
-      'string.min': 'Status should have a minimum length of {#limit}',
-      'string.max': 'Status should have a maximum length of {#limit}'
+      'string.valid': 'Status should be one of Active, Inactive'
     })
     .required()
 });
@@ -30,11 +28,10 @@ export const patchSpaceshipsSchema = joi.object({
     'string.max': 'Name should have a maximum length of {#limit}'
   }),
   Capacity: joi.number().integer().min(1),
-  Status: joi.string().min(3).max(30).trim().messages({
+  Status: joi.string().trim().valid('Active', 'Inactive').messages({
     'string.base': 'Status should be a string',
     'string.empty': 'Status should not be empty',
-    'string.min': 'Status should have a minimum length of {#limit}',
-    'string.max': 'Status should have a maximum length of {#limit}'
+    'string.valid': 'Status should be one of Active, Inactive'
   })
 });
 

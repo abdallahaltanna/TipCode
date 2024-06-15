@@ -6,7 +6,7 @@ const Spaceships = `
         Name VARCHAR(255) NOT NULL,
         Capacity INT NOT NULL CHECK (Capacity > 0),
         LaunchDate DATE NOT NULL,
-        Status VARCHAR(255) NOT NULL
+        Status ENUM('Active', 'Inactive') NOT NULL DEFAULT 'Active'
     );
 `;
 

@@ -1,12 +1,33 @@
 import db from '../database/connection';
 import GenericError from '../errors/genericError';
 import { IMission } from '../utils/interfaces';
+import PaginationSearch from '../utils/paginationSearch';
 
 class MissionsService {
-  // Get all missions query
-  static async getAllMissionsQuery(): Promise<IMission[]> {
-    const [missions] = await db.query('SELECT * FROM Missions');
-    return missions as IMission[];
+  // Get all missions query with pagination and search
+  static async getAllMissionsQuery(
+    search: string,
+    page: number,
+    limit: number
+  ): Promise<{
+    total: number;
+    currentPage: number;
+    numberOfPages: number;
+    data: IMission[];
+  }> {
+    const result = await PaginationSearch<IMission>(
+      'Missions',
+      'Destination',
+      search,
+      page,
+      limit
+    );
+    return {
+      total: result.total,
+      currentPage: result.currentPage,
+      numberOfPages: result.numberOfPages,
+      data: result.data
+    };
   }
 
   // Create mission query

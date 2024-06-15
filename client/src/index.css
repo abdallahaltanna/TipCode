@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+  cursor: pointer;
+}
+
+.app {
+  @apply flex md:gap-10 h-[calc(100vh-313px)] md:h-[calc(100vh-144px)];
+}
+
+.app h1 {
+  @apply text-3xl md:text-5xl lg:text-7xl;
+}
+
+.app h1 br {
+  @apply hidden md:block;
+}
+
+.app h1 a {
+  @apply text-[#6c63ff];
+}
+
+.app .app-header {
+  @apply md:w-[60%] flex flex-col justify-center;
+}
+
+.app .app-img {
+  @apply flex flex-col md:w-[40%] justify-center;
+}
+
+.app .app-img img {
+  @apply hidden md:block;
+}
+
+* {
+  @apply box-border;
+}

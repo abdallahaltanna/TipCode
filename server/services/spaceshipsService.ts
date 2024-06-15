@@ -1,12 +1,33 @@
 import db from '../database/connection';
 import GenericError from '../errors/genericError';
+import checkAssociation from '../utils/checkAssociation';
 import { ISpaceship } from '../utils/interfaces';
+import PaginationSearch from '../utils/paginationSearch';
 
 class SpaceshipsService {
-  // Get all spaceships query
-  static async getAllSpaceshipsQuery(): Promise<ISpaceship[]> {
-    const [spaceships] = await db.query('SELECT * FROM Spaceships');
-    return spaceships as ISpaceship[];
+  static async getAllSpaceshipsQuery(
+    search: string,
+    page: number,
+    limit: number
+  ): Promise<{
+    total: number;
+    numberOfPages: number;
+    currentPage: number;
+    data: ISpaceship[];
+  }> {
+    const result = await PaginationSearch<ISpaceship>(
+      'Spaceships',
+      'Name',
+      search,
+      page,
+      limit
+    );
+    return {
+      total: result.total,
+      currentPage: result.currentPage,
+      numberOfPages: result.numberOfPages,
+      data: result.data
+    };
   }
 
   // Create spaceship query
@@ -86,6 +107,15 @@ class SpaceshipsService {
   // Delete spaceship query
   static async deleteSpaceshipQuery(id: number) {
     await this.getSpaceshipQuery(id);
+
+    // call checkAssociation function here
+    const { mission, crew } = await checkAssociation(Number(id));
+    if (mission || crew) {
+      throw new GenericError(
+        409,
+        'Spaceship is associated with missions or crew members'
+      );
+    }
 
     await db.query('DELETE FROM Spaceships WHERE SpaceshipID = ?', [id]);
   }

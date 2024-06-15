@@ -2,21 +2,29 @@ import { NextFunction, Request, Response } from 'express';
 import { ValidationResult } from 'joi';
 
 import SpaceshipsService from '../services/spaceshipsService';
-import { ISpaceship } from '../utils/interfaces';
+import { ISpaceship, IPaginationSearch } from '../utils/interfaces';
 import { spaceshipsSchema, patchSpaceshipsSchema } from '../validations';
 import GenericError from '../errors/genericError';
-import checkAssociation from '../utils/checkAssociation';
 
 class SpaceshipsController {
   // Get all spaceships controller
   static async getAllSpaceships(
-    req: Request,
+    req: Request<{}, {}, {}, IPaginationSearch>,
     res: Response,
     next: NextFunction
   ): Promise<void> {
     try {
-      const spaceships = await SpaceshipsService.getAllSpaceshipsQuery();
-      res.status(200).json(spaceships);
+      const { search, page = 1, limit = 5 } = req.query;
+      const pageNum = parseInt(page as string, 10);
+      const limitNum = parseInt(limit as string, 10);
+
+      const result = await SpaceshipsService.getAllSpaceshipsQuery(
+        search as string,
+        pageNum,
+        limitNum
+      );
+
+      res.status(200).json(result);
     } catch (error) {
       next(error);
     }
@@ -142,15 +150,6 @@ class SpaceshipsController {
   ): Promise<void> {
     const { id } = req.params;
     try {
-      // call checkAssociation function here
-      const { mission, crew } = await checkAssociation(Number(id));
-      if (mission || crew) {
-        throw new GenericError(
-          409,
-          'Spaceship is associated with missions or crew members'
-        );
-      }
-
       await SpaceshipsService.deleteSpaceshipQuery(Number(id));
 
       res

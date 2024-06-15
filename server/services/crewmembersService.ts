@@ -1,12 +1,33 @@
 import db from '../database/connection';
 import GenericError from '../errors/genericError';
 import { ICrewMember } from '../utils/interfaces';
+import PaginationSearch from '../utils/paginationSearch';
 
 class CrewMembersService {
-  // Get all crew members query
-  static async getAllCrewMembersQuery(): Promise<ICrewMember[]> {
-    const [crewMembers] = await db.query('SELECT * FROM CrewMembers');
-    return crewMembers as ICrewMember[];
+  // Get all crew members query with pagination and search
+  static async getAllCrewMembersQuery(
+    search: string,
+    page: number,
+    limit: number
+  ): Promise<{
+    total: number;
+    currentPage: number;
+    numberOfPages: number;
+    data: ICrewMember[];
+  }> {
+    const result = await PaginationSearch<ICrewMember>(
+      'CrewMembers',
+      'Name',
+      search,
+      page,
+      limit
+    );
+    return {
+      total: result.total,
+      currentPage: result.currentPage,
+      numberOfPages: result.numberOfPages,
+      data: result.data
+    };
   }
 
   // Create crew member query

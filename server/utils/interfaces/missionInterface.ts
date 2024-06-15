@@ -1,5 +1,5 @@
 interface IMission {
-  Destination: string;
+  Destination: number;
   LaunchDate: string | Date;
   Duration: number;
   SpaceshipID: number;
