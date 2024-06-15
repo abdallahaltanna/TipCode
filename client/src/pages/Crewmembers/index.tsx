@@ -1,34 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { NewBtn } from '../../components';
-import { ICrewmember } from '../../interfaces';
+import { NewBtn, Pagination, SearchInput } from '../../components';
+import { ICrewmember, ICrewmemberPagination } from '../../interfaces';
 import { deleteItem, getItems } from '../../api';
+import handlePagination from '../../utils/pagination';
 
 const Crewmembers: React.FC = (): React.ReactElement => {
   // Crewmembers state
   const [crewmembers, setCrewmembers] = useState([] as ICrewmember[]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [numberOfPages, setNumberOfPages] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   // Delete crewmember
   const handleDelete = async (id: number) => {
     const success = await deleteItem('/crewmembers', Number(id));
     if (success) {
       setCrewmembers(crewmembers.filter(c => c.CrewMemberID !== id));
+
+      handlePagination(
+        total,
+        currentPage,
+        setTotal,
+        setNumberOfPages,
+        setCurrentPage,
+        () => fetchData(currentPage, searchTerm)
+      );
     }
+  };
+
+  // Fetch crewmembers
+  const fetchData = async (page: number, search = '') => {
+    const { crewMembers, currentPage, numberOfPages, total } =
+      await getItems<ICrewmemberPagination>(
+        `/crewmembers?page=${page}&limit=5&search=${search}`
+      );
+    setCrewmembers(crewMembers);
+    setCurrentPage(currentPage);
+    setNumberOfPages(numberOfPages);
+    setTotal(total);
   };
 
   useEffect(() => {
     // Get crewmembers
-    getItems<ICrewmember[]>('/crewmembers', setCrewmembers);
-  }, []);
+    fetchData(currentPage, searchTerm);
+  }, [currentPage, searchTerm]);
+
+  // Handle search
+  const handleSearch = (search: string) => {
+    setSearchTerm(search);
+    setCurrentPage(1);
+  };
 
   return (
     <div>
-      <div className='flex justify-between'>
+      <div className='flex justify-between items-center'>
         <NewBtn link='/crewmembers/add-crewmember' name='New Crewmember' />
         <div className='text-gray-500 dark:text-gray-400'>
-          Total Crewmembers:
+          Total Crewmembers: {total}
         </div>
       </div>
+      <SearchInput onSearch={handleSearch} />
       {crewmembers.length > 0 ? (
         <>
           <div className='relative overflow-x-auto shadow-md sm:rounded-lg mt-7'>
@@ -111,6 +144,11 @@ const Crewmembers: React.FC = (): React.ReactElement => {
               </tbody>
             </table>
           </div>
+          <Pagination
+            changePage={setCurrentPage}
+            numOfPages={numberOfPages}
+            page={currentPage}
+          />
         </>
       ) : (
         <div className='text-center text-lg text-gray-500 mt-52'>
@@ -120,4 +158,5 @@ const Crewmembers: React.FC = (): React.ReactElement => {
     </div>
   );
 };
+
 export default Crewmembers;

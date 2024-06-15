@@ -13,7 +13,7 @@ class CrewMembersService {
     total: number;
     currentPage: number;
     numberOfPages: number;
-    data: ICrewMember[];
+    crewMembers: ICrewMember[];
   }> {
     const result = await PaginationSearch<ICrewMember>(
       'CrewMembers',
@@ -26,7 +26,7 @@ class CrewMembersService {
       total: result.total,
       currentPage: result.currentPage,
       numberOfPages: result.numberOfPages,
-      data: result.data
+      crewMembers: result.data
     };
   }
 

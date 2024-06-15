@@ -13,7 +13,7 @@ class MissionsService {
     total: number;
     currentPage: number;
     numberOfPages: number;
-    data: IMission[];
+    missions: IMission[];
   }> {
     const result = await PaginationSearch<IMission>(
       'Missions',
@@ -26,7 +26,7 @@ class MissionsService {
       total: result.total,
       currentPage: result.currentPage,
       numberOfPages: result.numberOfPages,
-      data: result.data
+      missions: result.data
     };
   }
 

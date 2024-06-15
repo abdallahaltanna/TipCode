@@ -13,7 +13,7 @@ class SpaceshipsService {
     total: number;
     numberOfPages: number;
     currentPage: number;
-    data: ISpaceship[];
+    spaceships: ISpaceship[];
   }> {
     const result = await PaginationSearch<ISpaceship>(
       'Spaceships',
@@ -26,7 +26,7 @@ class SpaceshipsService {
       total: result.total,
       currentPage: result.currentPage,
       numberOfPages: result.numberOfPages,
-      data: result.data
+      spaceships: result.data
     };
   }
 

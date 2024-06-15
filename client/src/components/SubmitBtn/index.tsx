@@ -16,7 +16,7 @@ const SubmitBtn: React.FC<SubmitBtnProps> = ({
   return (
     <button
       type='submit'
-      className={`text-white bg-[#6c63ff]  focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ${
+      className={`text-white bg-[#6c63ff] hover:bg-[#6761d8] transition-all duration-300 ease-in-out  focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ${
         isFormValid ? '' : 'opacity-50 cursor-not-allowed'
       }`}
       onClick={onClick}

@@ -7,6 +7,14 @@ interface ISpaceship {
   Status: string;
 }
 
+// ISpaceshipPagination interface
+interface ISpaceshipPagination {
+  spaceships: ISpaceship[];
+  currentPage: number;
+  total: number;
+  numberOfPages: number;
+}
+
 // ICrewmember interface
 interface ICrewmember {
   CrewMemberID: number;
@@ -14,6 +22,14 @@ interface ICrewmember {
   Role: number;
   ExperienceLevel: string;
   AssignedSpaceshipID: string;
+}
+
+// ICrewmemberPagination interface
+interface ICrewmemberPagination {
+  crewMembers: ICrewmember[];
+  currentPage: number;
+  total: number;
+  numberOfPages: number;
 }
 
 // IMission interface
@@ -25,4 +41,19 @@ interface IMission {
   Duration: number;
 }
 
-export type { ISpaceship, ICrewmember, IMission };
+// IMissionPagination interface
+interface IMissionPagination {
+  missions: IMission[];
+  currentPage: number;
+  total: number;
+  numberOfPages: number;
+}
+
+export type {
+  ISpaceship,
+  ICrewmember,
+  IMission,
+  ICrewmemberPagination,
+  ISpaceshipPagination,
+  IMissionPagination
+};

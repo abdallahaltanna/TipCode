@@ -39,7 +39,7 @@ const CreateMission: React.FC = (): React.ReactElement => {
       <form className='max-w-sm mx-auto'>
         <FormControl
           name='Destination'
-          type='text'
+          type='number'
           value={Destination}
           onChange={e => setDestination(parseInt(e.target.value))}
         />

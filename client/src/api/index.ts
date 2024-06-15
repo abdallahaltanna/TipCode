@@ -6,15 +6,13 @@ import { toast } from 'react-toastify';
 const API = axios.create({ baseURL: '/api/v1' });
 
 // get items
-const getItems = async <T>(
-  url: string,
-  setState: React.Dispatch<React.SetStateAction<T>>
-): Promise<void> => {
+const getItems = async <T>(url: string): Promise<T> => {
   try {
     const response = await API.get(url);
-    setState(response.data as T);
+    return response.data as T;
   } catch (error: any) {
     toast.error(error.response.data.msg);
+    throw error;
   }
 };
 

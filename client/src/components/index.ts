@@ -6,6 +6,7 @@ import NewBtn from './NewBtn';
 import SubmitBtn from './SubmitBtn';
 import Layout from './Layout';
 import Pagination from './Pagination';
+import SearchInput from './SearchInput';
 
 export {
   BackBtn,
@@ -15,5 +16,6 @@ export {
   NewBtn,
   SubmitBtn,
   Layout,
-  Pagination
+  Pagination,
+  SearchInput
 };

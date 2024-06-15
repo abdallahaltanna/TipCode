@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NotFoundImg from '../../assets/404.svg';
 
+// NotFound Page
 const NotFound: React.FC = (): React.ReactElement => {
   return (
     <div className='flex flex-col items-center justify-center h-screen'>
