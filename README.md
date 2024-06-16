@@ -56,7 +56,7 @@ The application consists of 3 tables
 - 📦 Database: MySQL
 - 🍪 Session Management: cookie-parser
 - ✅ Validation: Joi
-- 📦 DevOps: Docker
+- 📦 DevOps: Docker & Github Actions
 - 🚀 Deployment: Azure
 
 ## 📬 Postman Collection
