@@ -1,7 +1,8 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 import config from './config';
 import router from './routes';
@@ -49,6 +50,20 @@ class App {
 
   private initializeRoutes() {
     this.app.use('/api/v1', router);
+
+    if (this.nodeEnv === 'production') {
+      // Serve any static files
+      this.app.use(
+        express.static(path.resolve(__dirname, '../../client/dist'))
+      );
+
+      // Handle React routing, return all requests to React app
+      this.app.get('*', function (req: Request, res: Response) {
+        res.sendFile(
+          path.resolve(__dirname, '../../client/dist', 'index.html')
+        );
+      });
+    }
   }
 
   private initializeErrorHandling() {
