@@ -11,7 +11,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onSearch
 }): React.ReactElement => {
   // Search term state
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   // Handle search function
   const handleSearch = (e: React.FormEvent) => {

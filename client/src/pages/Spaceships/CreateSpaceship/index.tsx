@@ -15,7 +15,7 @@ const CreateSpaceship: React.FC = (): React.ReactElement => {
   // Form fields
   const [Name, setName] = useState<string>('');
   const [Capacity, setCapacity] = useState<number>(1);
-  const [statusOptions, setStatusOptions] = useState(['Active', 'Inactive']);
+  const [statusOptions] = useState<string[]>(['Active', 'Inactive']);
   const [Status, setStatus] = useState<string>('Active');
 
   // Check if all fields are filled

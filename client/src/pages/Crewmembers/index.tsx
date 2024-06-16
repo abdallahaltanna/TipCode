@@ -8,9 +8,9 @@ import handlePagination from '../../utils/pagination';
 const Crewmembers: React.FC = (): React.ReactElement => {
   // Crewmembers state
   const [crewmembers, setCrewmembers] = useState([] as ICrewmember[]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [numberOfPages, setNumberOfPages] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [numberOfPages, setNumberOfPages] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   // Delete crewmember

@@ -9,9 +9,9 @@ import handlePagination from '../../utils/pagination';
 const Spaceships: React.FC = (): React.ReactElement => {
   //  Spaceships state
   const [spaceships, setSpaceships] = useState([] as ISpaceship[]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [numberOfPages, setNumberOfPages] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [numberOfPages, setNumberOfPages] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   // Delete spaceship

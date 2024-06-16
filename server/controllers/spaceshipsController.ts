@@ -3,7 +3,11 @@ import { ValidationResult } from 'joi';
 
 import SpaceshipsService from '../services/spaceshipsService';
 import { ISpaceship, IPaginationSearch } from '../utils/interfaces';
-import { spaceshipsSchema, patchSpaceshipsSchema } from '../validations';
+import {
+  spaceshipsSchema,
+  patchSpaceshipsSchema,
+  paginationSchema
+} from '../validations';
 import GenericError from '../errors/genericError';
 
 class SpaceshipsController {
@@ -18,10 +22,20 @@ class SpaceshipsController {
       const pageNum = parseInt(page as string, 10);
       const limitNum = parseInt(limit as string, 10);
 
+      const { error, value }: ValidationResult = paginationSchema.validate({
+        search,
+        page: pageNum,
+        limit: limitNum
+      });
+
+      if (error) {
+        throw new GenericError(400, error.details[0].message);
+      }
+
       const result = await SpaceshipsService.getAllSpaceshipsQuery(
-        search as string,
-        pageNum,
-        limitNum
+        value.search as string,
+        value.page as number,
+        value.limit as number
       );
 
       res.status(200).json(result);

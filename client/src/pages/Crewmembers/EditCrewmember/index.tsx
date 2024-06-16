@@ -17,7 +17,7 @@ const EditCrewmember: React.FC = (): React.ReactElement => {
 
   // Form fields
   const [Name, setName] = useState<string>('');
-  const [RoleOptions, setRoleOptions] = useState([
+  const [RoleOptions] = useState<string[]>([
     'Commander',
     'Pilot',
     'Engineer',
@@ -25,15 +25,15 @@ const EditCrewmember: React.FC = (): React.ReactElement => {
     'Medic',
     'Technician'
   ]);
-  const [Role, setRole] = useState('Technician');
-  const [ExperienceLevelOptions, setExperienceLevelOptions] = useState([
+  const [Role, setRole] = useState<string>('Technician');
+  const [ExperienceLevelOptions] = useState<string[]>([
     'Novice',
     'Intermediate',
     'Advanced',
     'Expert',
     'Veteran'
   ]);
-  const [ExperienceLevel, setExperienceLevel] = useState('Novice');
+  const [ExperienceLevel, setExperienceLevel] = useState<string>('Novice');
   // Check if all fields are filled
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
