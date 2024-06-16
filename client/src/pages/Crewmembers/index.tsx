@@ -25,7 +25,8 @@ const Crewmembers: React.FC = (): React.ReactElement => {
         setTotal,
         setNumberOfPages,
         setCurrentPage,
-        () => fetchData(currentPage, searchTerm)
+        searchTerm,
+        fetchData
       );
     }
   };

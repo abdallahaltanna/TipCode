@@ -4,6 +4,7 @@ export default function handlePagination(
   setTotal: (value: number) => void,
   setNumberOfPages: (value: number) => void,
   setCurrentPage: (value: number) => void,
+  search: string,
   fetchData: (page: number, search: string) => void
 ) {
   // Calculate the new total after deletion
@@ -14,15 +15,22 @@ export default function handlePagination(
   const newNumberOfPages = Math.ceil(newTotal / 5);
   setNumberOfPages(newNumberOfPages);
 
-  // If the current page exceeds the new number of pages, reset to the first page
+  // Determine the new current page
+  let newPage = currentPage;
+
+  // If the current page is greater than the new number of pages, go back to the previous page
   if (currentPage > newNumberOfPages) {
-    setCurrentPage(1);
-  } else {
-    // If the current page still exists, fetch the data for the current page
-    if (currentPage !== newNumberOfPages) {
-      fetchData(currentPage, '');
-    } else {
-      setCurrentPage(currentPage);
+    newPage = newNumberOfPages;
+
+    // If the current page is less than 1, set it to 1
+    if (newPage < 1) {
+      newPage = 1;
     }
+
+    // Update the current page state
+    setCurrentPage(newPage);
+  } else {
+    // Fetch data for the current page with the search term
+    fetchData(newPage, search);
   }
 }
