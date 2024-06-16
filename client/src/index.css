@@ -18,7 +18,7 @@ a {
   @apply hidden md:block;
 }
 
-.app h1 a {
+.app h1 span {
   @apply text-[#6c63ff];
 }
 

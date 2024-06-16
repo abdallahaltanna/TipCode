@@ -1,6 +1,5 @@
 import React from 'react';
 import HomePageImg from './assets/HomePageImg.svg';
-import { Link } from 'react-router-dom';
 
 const App: React.FC = (): React.ReactElement => {
   return (
@@ -9,7 +8,7 @@ const App: React.FC = (): React.ReactElement => {
       <div className='app-header'>
         <h1>
           Discover The <br />
-          <Link to='/spaceship'>Spaceship</Link> App
+          <span>Spaceship Travel </span> App
         </h1>
       </div>
       <div className='app-img'>

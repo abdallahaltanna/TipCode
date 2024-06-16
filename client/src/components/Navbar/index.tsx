@@ -12,7 +12,7 @@ const Navbar: React.FC = (): React.ReactElement => {
         <NavLink to='/'>
           <IoIosRocket size={30} />
 
-          <span>Spaceship</span>
+          <span>Spaceship Travel</span>
         </NavLink>
 
         <div className={styles.nav} id='navbar-dropdown'>
