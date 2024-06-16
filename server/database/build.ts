@@ -1,16 +1,19 @@
 import db from './connection';
 import { CrewMembers, Missions, Spaceships } from '../models';
 import { exit } from 'process';
+import config from '../config';
 
 const createDatabaseAndTables = async (): Promise<void> => {
   try {
-    // Create the database
-    await db.query(`CREATE DATABASE IF NOT EXISTS SpaceshipTravelSystem`);
-    console.log('Database created or already exists.');
+    if (config.nodeEnv === 'development') {
+      // Create the database
+      await db.query(`CREATE DATABASE IF NOT EXISTS SpaceshipTravelSystem`);
+      console.log('Database created or already exists.');
 
-    // Use the database
-    await db.query(`USE SpaceshipTravelSystem`);
-    console.log('Using SpaceshipTravelSystem database.');
+      // Use the database
+      await db.query(`USE SpaceshipTravelSystem`);
+      console.log('Using SpaceshipTravelSystem database.');
+    }
 
     // Create tables
     const tables = [Spaceships, CrewMembers, Missions];
